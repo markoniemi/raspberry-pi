@@ -1,0 +1,14 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "Debian-Wheezy-i386"
+  config.vm.box_url = "http://tools.swergroup.com/downloads/wheezy32.box"
+
+  config.vm.define 'raspberry-pi' do |node|
+    node.vm.hostname = 'raspberry-pi'
+    node.vm.network :private_network, ip: "192.168.50.43"
+    node.vm.provision "shell",
+      inline: "source /vagrant/scripts/raspberry-pi.sh; provision"
+  end
+end
